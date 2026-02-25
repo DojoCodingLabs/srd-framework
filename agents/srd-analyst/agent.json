@@ -1,9 +1,0 @@
-{
-  "name": "srd-analyst",
-  "description": "Generates complete SRD frameworks by analyzing codebases, PRDs, and project context. Produces personas, journeys, gap audits, and machine-readable directives.",
-  "model": "opus",
-  "isolation": "worktree",
-  "tools": {
-    "enabled": ["Read", "Write", "Edit", "Grep", "Glob", "Bash", "Task"]
-  }
-}

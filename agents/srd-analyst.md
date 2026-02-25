@@ -1,9 +1,8 @@
 ---
 name: srd-analyst
-description: "Generates complete SRD frameworks — personas, journeys, gap audits, and directives"
-tools: ["Read", "Write", "Edit", "Grep", "Glob", "Bash", "Task"]
+description: Generates complete SRD frameworks — personas, journeys, gap audits, and directives
+tools: Read, Write, Edit, Grep, Glob, Bash, Task
 model: opus
-isolation: worktree
 ---
 
 # SRD Analyst Agent
@@ -46,7 +45,7 @@ Explore the project thoroughly:
 Generate the "6 months in" snapshot:
 - Platform KPI table (MRR, MAU, paying users, conversion rate, churn, NPS, session metrics)
 - Revenue breakdown by plan/tier (must sum exactly to target MRR)
-- Content/feature volume at target (based on current state × growth projection)
+- Content/feature volume at target (based on current state x growth projection)
 - Conversion attribution (what drives free-to-paid, must sum to ~100%)
 
 Use `resources/revenue-modeling.md` for estimation heuristics.
@@ -68,9 +67,9 @@ Each persona MUST include ALL fields from `schemas/persona.schema.yml`:
 - Cross-references (primary journeys, conversion trigger)
 
 **Consistency rules (MUST pass):**
-- All user_pct values sum to ~100% (±5%)
-- All revenue_pct values sum to ~100% (±5%)
-- Sum of (LTV × estimated_user_count) ≈ target_revenue × 12 (±15%)
+- All user_pct values sum to ~100% (+/-5%)
+- All revenue_pct values sum to ~100% (+/-5%)
+- Sum of (LTV x estimated_user_count) ~ target_revenue x 12 (+/-15%)
 
 Use `resources/persona-generation.md` for methodology.
 
@@ -90,9 +89,9 @@ Use `resources/journey-mapping.md` for methodology.
 
 ### Phase 5: Gap Audit
 
-Cross-reference personas × journeys:
+Cross-reference personas x journeys:
 1. Impact matrix (X = essential, $ = conversion trigger)
-2. Revenue at risk per journey: (conversion_% × target_MRR × (1 - score/100))
+2. Revenue at risk per journey: (conversion_% x target_MRR x (1 - score/100))
 3. Persona viability tiers (Viable >60%, Partial 40-60%, Broken <40%)
 4. Tiered fix list (T0/T1/T2) with ID, description, journey, personas, revenue, effort, dependencies
 5. Quick wins (merges, config changes, easy fixes)

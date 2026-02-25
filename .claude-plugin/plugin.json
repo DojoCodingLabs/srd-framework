@@ -1,20 +1,8 @@
 {
   "name": "srd-framework",
-  "displayName": "SRD Framework — Synthetic Reality Development",
-  "description": "Backwards-from-success product methodology that generates synthetic personas, critical journeys, gap audits, and machine-readable directives for AI-native development teams. Works on codebases, PRDs, or just ideas.",
-  "version": "1.0.0",
+  "description": "Backwards-from-success product methodology that generates synthetic personas, critical journeys, gap audits, and machine-readable directives for AI-native development teams",
   "author": {
     "name": "DojoCodingLabs",
     "url": "https://github.com/DojoCodingLabs"
-  },
-  "repository": "https://github.com/DojoCodingLabs/srd-framework",
-  "license": "MIT",
-  "keywords": [
-    "product-strategy",
-    "synthetic-personas",
-    "user-journeys",
-    "gap-analysis",
-    "ai-native-development",
-    "backwards-from-success"
-  ]
+  }
 }

@@ -1,7 +1,7 @@
 ---
 name: codebase-auditor
-description: "Read-only codebase exploration agent for SRD context gathering"
-tools: ["Read", "Grep", "Glob", "Bash"]
+description: Read-only codebase exploration agent for SRD context gathering
+tools: Read, Grep, Glob, Bash
 model: sonnet
 ---
 

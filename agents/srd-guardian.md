@@ -1,7 +1,7 @@
 ---
 name: srd-guardian
-description: "Validates development work against SRD priorities — prevents misaligned development"
-tools: ["Read", "Grep", "Glob", "Bash"]
+description: Validates development work against SRD priorities — prevents misaligned development
+tools: Read, Grep, Glob, Bash
 model: sonnet
 ---
 

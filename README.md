@@ -24,13 +24,21 @@ The result: a machine-readable operating system for your development team that a
 
 ## Quick Start
 
-### Install as a Claude Code Plugin
+### Install
 
-```bash
-claude plugin install @dojocoding/srd-framework
+In Claude Code, run:
+
+```
+/plugin install srd-framework
 ```
 
-Or for local development:
+Or install from the GitHub repository:
+
+```
+/plugin install srd-framework --url https://github.com/DojoCodingLabs/srd-framework.git
+```
+
+For local development:
 
 ```bash
 git clone https://github.com/DojoCodingLabs/srd-framework.git
