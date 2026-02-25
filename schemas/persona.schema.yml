@@ -1,0 +1,51 @@
+# SRD Persona Schema
+# Every persona in personas.yml MUST conform to this structure.
+# All fields are required unless marked (optional).
+
+persona:
+  id: string                    # Format: "P01", "P02", etc. Sequential.
+  name: string                  # Human first name implying cultural background
+  archetype: string             # Short descriptor, e.g., "Career Switcher (LatAm)"
+
+  identity:
+    age: number                 # Specific number, not a range
+    location: string            # "City, Country" format
+    background: string          # 2-3 sentences: education, current job, experience
+    goals: string               # What they want to achieve using this product
+    pain_points: string         # Frustrations with current alternatives
+    tech_stack: string          # Tools and technologies they use
+    languages: string[]         # Language codes: ["en", "es", "pt"]
+
+  wallet_profile:
+    income: string              # Monthly with currency: "$800/month"
+    plan_progression: string    # Timeline: "Free (Week 1) -> Pro (Month 1) -> Annual (Month 4)"
+    upgrade_trigger: string     # The specific moment causing conversion
+    monthly_spend: string       # Dollar amount or range
+    ltv: number                 # Lifetime value in dollars
+    user_pct: number            # % of total user base (all personas sum to ~100)
+    revenue_pct: number         # % of total revenue (all personas sum to ~100)
+
+  lifecycle:                    # Array of time-based entries (minimum 6 entries)
+    - time: string              # "Day 1", "Week 1", "Month 1", "Month 6", etc.
+      actions: string           # 2-4 sentences of specific behavior
+      features_touched: string[] # Screens/routes/features interacted with
+      classification: string    # "Revenue-Critical" | "Value-Delivery"
+
+  scores:
+    revenue: number             # 1-10: direct revenue generation
+    engagement: number          # 1-10: platform activity level
+    virality: number            # 1-10: referral/evangelism potential
+
+  churn_risk_moments:           # Array of 2-4 entries
+    - time: string              # When the risk peaks: "Week 2", "Month 3"
+      condition: string         # What triggers potential churn
+
+  primary_journeys: string[]    # Journey IDs: ["J1", "J2", "J4"]
+  conversion_trigger: string    # The single most important conversion moment
+  critical_note: string         # (optional) Flags for broken lifecycle elements
+
+# Consistency rules:
+# - Sum of all persona user_pct values must be approximately 100%
+# - Sum of all persona revenue_pct values must be approximately 100%
+# - Sum of (ltv * user_count) for all personas must approximate target_revenue * 12
+# - Every journey referenced in primary_journeys must exist in journeys.md

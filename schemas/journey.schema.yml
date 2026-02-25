@@ -1,0 +1,41 @@
+# SRD Journey Schema
+# Every journey in journeys.md MUST conform to this structure.
+# All fields are required unless marked (optional).
+
+journey:
+  id: string                    # Format: "J1", "J2", etc. Sequential.
+  name: string                  # Action chain: "Discovery -> Signup -> Onboarding"
+  personas: string[]            # Persona IDs that use this journey: ["P01", "P02"]
+  revenue_tag: string           # "Revenue-Critical" | "Value-Delivery"
+
+  steps:                        # 5-12 steps per journey
+    - step: number              # Sequential: 1, 2, 3...
+      user_action: string       # What the persona physically does
+      screen_route: string      # Actual route (/path) or [TBD] for ideas
+      what_must_happen: string  # Required system behavior
+      data_required: string     # What data must exist for this step to work
+
+  current_score: number         # 0-100 percentage
+  score_rationale: string       # Brief explanation of why this score
+
+  acceptance_criteria:          # Binary pass/fail tests (minimum 4)
+    - test: string              # Specific testable statement
+      status: string            # "PASS" | "FAIL" | "PARTIAL"
+      fix: string               # (optional) Fix reference if not PASS: "T0-1", "T1-3"
+
+  revenue_impact:
+    conversion_pct: number      # What % of total conversions this journey drives
+    revenue_at_risk: number     # Dollar amount at risk if journey is broken
+    personas_blocked: number    # How many personas are blocked
+
+# Scoring guidelines:
+# - 0-25%: Broken — core steps don't work
+# - 25-50%: Scaffolded — structure exists but critical steps missing
+# - 50-75%: Partial — most steps work but gaps block completion
+# - 75-90%: Mostly complete — works end-to-end with minor issues
+# - 90-100%: Complete — full happy path works
+
+# Dependency rules:
+# - Journey dependency graph must be documented in gap-audit.md
+# - A journey's effective score is min(own_score, dependency_score)
+# - If J1 (signup) is broken, all dependent journeys are effectively 0%

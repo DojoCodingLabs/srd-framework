@@ -1,0 +1,71 @@
+# SRD Directive Schema
+# The claude-directive.yml file MUST conform to this structure.
+# This is the machine-readable "operating system" for AI agents and engineers.
+
+directive:
+  project_name: string          # Name of the project
+  target_revenue: string        # e.g., "$100K MRR"
+  generated_date: string        # ISO date: "2026-02-25"
+  framework_version: string     # SRD Framework version: "1.0.0"
+
+  north_star:
+    question: string            # The one question that determines if the product is ready
+    current_answer: string      # "Yes" | "No"
+    target_answer: string       # Always "Yes"
+    explanation: string         # What must be true for the answer to be "Yes"
+
+  priority_rules:               # Ordered list — apply in sequence to break ties
+    - id: number                # Sequential: 1, 2, 3...
+      rule: string              # SCREAMING_SNAKE_CASE name
+      description: string       # When and how to apply this rule
+      example: string           # Concrete example of the rule in action
+
+  anti_patterns:                # Things to NEVER do
+    - id: string                # "AP-1", "AP-2", etc.
+      name: string              # SCREAMING_SNAKE_CASE name
+      description: string       # What it is and why it's bad
+      trigger: string           # What the developer says/does that indicates this
+      response: string          # What to say back to redirect
+
+  personas:                     # Quick reference (abbreviated from personas.yml)
+    - id: string                # "P01"
+      name: string              # "Maria"
+      archetype: string         # "Career Switcher (LatAm)"
+      plan: string              # "Pro Annual"
+      ltv: number               # 492
+      revenue_pct: number       # 15
+      user_pct: number          # 18
+      primary_journeys: string[] # ["J1", "J2", "J3"]
+      conversion_trigger: string # "Hits Pro wall in course + sees bounties"
+
+  journey_acceptance_criteria:  # Keyed by journey ID
+    # Each journey has an array of binary tests
+    J1:
+      name: string              # Journey name for readability
+      criteria:
+        - test: string          # Binary testable statement
+          status: string        # "PASS" | "FAIL" | "PARTIAL"
+          fix: string           # (optional) Fix reference: "T0-1"
+
+  current_priorities:           # Top 3-5 items from gap audit
+    - id: string                # "T0-1"
+      description: string       # What needs to be done
+      journey: string           # Which journey it fixes
+      revenue_at_risk: number   # Dollar amount
+      effort: string            # "S" | "M" | "L"
+
+# Usage instructions for AI agents:
+#
+# 1. Read priority_rules in order. Apply each rule sequentially to determine
+#    which task to work on next.
+#
+# 2. Before starting any work, check anti_patterns. If the proposed work
+#    matches a trigger, redirect using the response.
+#
+# 3. After completing work, check journey_acceptance_criteria for the
+#    affected journey. Did the status change from FAIL to PASS?
+#
+# 4. Reference personas when making UX decisions — "Would P01 (Maria)
+#    understand this flow?"
+#
+# 5. Check current_priorities for the highest-impact unfixed item.

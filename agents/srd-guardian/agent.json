@@ -1,0 +1,8 @@
+{
+  "name": "srd-guardian",
+  "description": "Validates development work against SRD journey priorities and acceptance criteria. Flags misaligned work and anti-pattern violations.",
+  "model": "sonnet",
+  "tools": {
+    "enabled": ["Read", "Grep", "Glob", "Bash"]
+  }
+}

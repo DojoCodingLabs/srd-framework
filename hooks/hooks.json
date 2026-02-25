@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'if [ -f srd/claude-directive.yml ]; then echo \"SRD Guardian reminder: Verify this change aligns with the highest-priority unfixed journey in srd/gap-audit.md. Check priority_rules in srd/claude-directive.yml.\"; fi'"
+          }
+        ]
+      }
+    ]
+  }
+}

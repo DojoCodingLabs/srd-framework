@@ -1,0 +1,8 @@
+{
+  "name": "codebase-auditor",
+  "description": "Explores codebases to extract product context for SRD generation — discovers routes, features, schemas, auth, monetization, and tech stack.",
+  "model": "sonnet",
+  "tools": {
+    "enabled": ["Read", "Grep", "Glob", "Bash"]
+  }
+}
