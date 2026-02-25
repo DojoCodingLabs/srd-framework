@@ -26,23 +26,30 @@ The result: a machine-readable operating system for your development team that a
 
 ### Install
 
-In Claude Code, run:
+In Claude Code, add the marketplace and install:
 
-```
-/plugin install srd-framework
-```
+```bash
+# Step 1: Add the SRD Framework marketplace
+/plugin marketplace add DojoCodingLabs/srd-framework
 
-Or install from the GitHub repository:
-
-```
-/plugin install srd-framework --url https://github.com/DojoCodingLabs/srd-framework.git
+# Step 2: Install the plugin
+/plugin install srd-framework@srd-framework
 ```
 
 For local development:
 
 ```bash
 git clone https://github.com/DojoCodingLabs/srd-framework.git
-claude --plugin-dir ./srd-framework
+cd srd-framework
+/plugin marketplace add .
+/plugin install srd-framework
+```
+
+### Update
+
+```bash
+claude plugin marketplace update DojoCodingLabs/srd-framework
+claude plugin update srd-framework@srd-framework
 ```
 
 ### Three Modes

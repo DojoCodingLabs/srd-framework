@@ -1,8 +1,28 @@
 {
   "name": "srd-framework",
-  "description": "Backwards-from-success product methodology that generates synthetic personas, critical journeys, gap audits, and machine-readable directives for AI-native development teams",
+  "version": "1.0.0",
+  "description": "Backwards-from-success product methodology for AI-native development teams. Define what done looks like, then reverse-engineer the path to get there.",
   "author": {
-    "name": "DojoCodingLabs",
-    "url": "https://github.com/DojoCodingLabs"
-  }
+    "name": "Dojo Coding",
+    "url": "https://dojocoding.io"
+  },
+  "homepage": "https://github.com/DojoCodingLabs/srd-framework",
+  "repository": "https://github.com/DojoCodingLabs/srd-framework",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "claude-code-plugin",
+    "claude",
+    "anthropic",
+    "claude-skills",
+    "product-strategy",
+    "synthetic-personas",
+    "user-journeys",
+    "gap-analysis",
+    "ai-native-development",
+    "backwards-from-success",
+    "revenue-prioritization",
+    "srd",
+    "dojo-coding"
+  ]
 }
