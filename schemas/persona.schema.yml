@@ -44,6 +44,11 @@ persona:
   conversion_trigger: string    # The single most important conversion moment
   critical_note: string         # (optional) Flags for broken lifecycle elements
 
+  # Optional elicitation fields — used by Synthetic Demand Validation (/srd:predict) to prime this
+  # persona as a panel respondent. Additive and non-breaking; omit and stance is inferred.
+  price_sensitivity: string     # (optional) "low" | "medium" | "high"
+  skepticism: string            # (optional) "low" | "medium" | "high"
+
 # Consistency rules:
 # - Sum of all persona user_pct values must be approximately 100%
 # - Sum of all persona revenue_pct values must be approximately 100%

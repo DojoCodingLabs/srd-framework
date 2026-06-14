@@ -1,0 +1,95 @@
+# SRD Forecast Schema
+# A "forecast" is the OUTPUT of a Synthetic Demand Validation run. Every file written to
+# srd/forecasts/<concept-id>.forecast.yml MUST conform to this structure.
+# All fields are required unless marked (optional).
+#
+# Read this alongside concept.schema.yml (the matching input) and the srd-prediction skill
+# resources (elicitation-methods.md, comparative-scaling.md, construct-battery.md,
+# price-sensitivity.md, calibration.md).
+
+forecast:
+  concept_id: string            # Matches concept.id this forecast answers
+  generated_date: string        # ISO date: "2026-06-13"
+  framework_version: string     # SRD Framework version: "1.1.0"
+
+  # --- Honesty header: how much to trust this forecast ---
+  fidelity_tier: string         # "T0" | "T1" | "T2" | "T3" (see calibration.md)
+                                #   T0 cold-start (zero-shot, ranking-only, directional)
+                                #   T1 persona-grounded (reuses srd/personas.yml)
+                                #   T2 data-anchored (anchors/behavior from real customer text)
+                                #   T3 outcome-calibrated (Stripe/PostHog synthetic->actual map)
+  ssr_mode: boolean             # true if embeddings-backed SSR was used; false = prompt-only FLR
+  elicitation_method: string    # "FLR" | "SSR"
+  familiarity_score: number     # 0.0-1.0 — model's prior strength for this domain; low => wider CIs
+  confidence_caveats: string    # Plain-language statement of what NOT to over-read
+
+  panel:
+    source: string              # "srd_personas" | "generated"
+    size: number                # Number of synthetic respondents polled
+    samples_per_respondent: number # Repeat samples per persona (variance control; >=3 recommended)
+    segments: string[]          # Persona IDs / segment labels actually polled
+
+  # --- Per-variant results ---
+  variants:
+    - id: string                # Matches a concept variant id ("V1")
+      label: string             # Echoed for readability
+
+      constructs:               # One entry per construct measured (see construct-battery.md)
+        - name: string          # "purchase_intent" | "appeal" | ...
+          mean: number          # Mean on the construct's native scale (1-5 for Likert constructs)
+          distribution: number[] # pmf over Likert points [p1,p2,p3,p4,p5]; sums to ~1.0
+          ci_low: number        # Lower bound of the confidence interval on the mean
+          ci_high: number       # Upper bound of the confidence interval on the mean
+          n_effective: number   # Effective sample size behind this estimate
+
+      demand_score: number      # 0-100 composite (weighted blend of constructs; see construct-battery.md)
+
+      comparative:              # PRIMARY signal in duel mode (see comparative-scaling.md)
+        best_worst_share: number # -1.0..+1.0 (best-picks minus worst-picks, normalized)
+        rank: number            # 1 = strongest variant in the set
+        win_rate: number        # 0.0-1.0 share of pairwise duels won
+        rank_stability: string  # "stable" | "unstable" — did rank hold across resamples?
+
+      willingness_to_pay:       # (optional) present when price_test ran for this variant
+        method: string          # "van_westendorp" | "gabor_granger"
+        currency: string        # "USD"
+        opp: number             # Optimal Price Point (VW) or revenue-max price (GG)
+        ipp: number             # (optional) Indifference Price Point (VW)
+        acceptable_range: number[] # [floor, ceiling] of acceptable prices
+        demand_curve:           # Estimated demand at each tested price
+          - price: number
+            pi_mean: number     # Mean purchase intent at this price (1-5)
+            est_conversion: number # 0.0-1.0 estimated conversion (calibrated at T3, modeled below)
+
+      top_objections:           # Structured qualitative -> feeds srd/gap-audit.md
+        - segment: string       # Persona ID / segment voicing it
+          objection: string     # The specific reason-not-to-buy, in the respondent's terms
+          severity: string      # "high" | "medium" | "low"
+          frequency: number     # 0.0-1.0 share of the segment raising it
+          gap_audit_ref: string # (optional) Fix ID once promoted to gap-audit: "D0-1"
+
+      top_drivers:              # Structured qualitative — what makes them want it
+        - segment: string
+          driver: string
+          strength: string      # "high" | "medium" | "low"
+
+  # --- How the numbers were grounded ---
+  calibration_metadata:
+    detected_capabilities: string[] # ["srd_personas","stripe","posthog","embeddings","assets","reviews"]
+    synthetic_to_actual_map: string # Description of the fitted map, or "none (zero-shot)"
+    intent_behavior_discount: number # Multiplier applied to convert intent -> est. action (<=1.0)
+
+  recommended_action: string    # The decision this forecast supports (ship V2 / re-price to $X / kill / iterate copy)
+
+# Consistency rules:
+# - Every variant.id MUST exist in the matching concept's variants.
+# - Each construct.distribution sums to ~1.0 (+/- 0.02) and has length 5 for Likert constructs.
+# - ci_low <= mean <= ci_high for every construct.
+# - demand_score is reproducible from the construct means and the weights in construct-battery.md.
+# - Lower fidelity_tier => WIDER confidence intervals (T0 widest). CIs must not be narrower than the
+#   tier allows; a T0 forecast claiming tight CIs is invalid.
+# - comparison_mode "single" (in the concept) => comparative.rank == 1 and best_worst_share may be null.
+# - willingness_to_pay present => the concept declared a price_test with a matching method.
+# - est_conversion is only a calibrated number at T3; at T0-T2 it is a modeled estimate and MUST be
+#   labeled as such in confidence_caveats.
+# - intent_behavior_discount == 1.0 only when justified by T3 calibration; otherwise < 1.0.

@@ -91,6 +91,24 @@ Each fix in the list should include:
 | **Effort** | S (hours), M (days), L (weeks) |
 | **Dependencies** | What must be done first |
 
+### Demand-Validation Fixes (D-tier)
+
+The T0/T1/T2 tiers above capture **supply-side** gaps (the product isn't built). Synthetic Demand
+Validation (`/srd:predict`) surfaces a second class of gap: **demand-side** blockers (the product *is*
+built, but people won't buy it — it's unclear, unbelievable, undifferentiated, or mispriced). These
+enter the fix list as a parallel **D-tier**, sourced from the structured objections in a forecast:
+
+| Tier | Source | Meaning |
+|------|--------|---------|
+| **D0** Demand Blocker | high-severity, high-frequency objection in a paying segment | Kills conversion now — fix offer/copy/proof/price |
+| **D1** Demand Friction | medium-severity or lower-frequency objection | Dampens conversion |
+| **D2** Demand Polish | low-severity objection | Minor lift |
+
+Each D-item uses the same Fix Entry Format (ID, description, journey/surface, personas, revenue at risk
+= segment `revenue_pct` × target MRR, effort, dependencies), with a suggested remedy from the forecast
+(e.g., "add a guarantee," "re-price to $X"). Interleave D0 with T0 by revenue at risk — a demand blocker
+that kills a paying segment outranks a value-delivery code fix.
+
 ### Quick Wins Section
 
 After the tiered list, identify quick wins:

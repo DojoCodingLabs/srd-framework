@@ -69,6 +69,12 @@ Map what drives users from free to paid:
 
 This attribution directly feeds the Gap Audit — broken paywalls = broken revenue.
 
+**Prefer calibrated numbers when available.** The conversion rates and price points in this section are
+benchmark heuristics — fine for a cold start, but they are *assumptions*. If a Synthetic Demand
+Validation forecast exists (`srd/forecasts/`, via `/srd:predict`), prefer its panel-derived conversion
+and willingness-to-pay figures over the benchmarks — and at fidelity tier T3 (Stripe/PostHog calibrated)
+treat them as ground-truth-anchored rather than estimated. Note which numbers are calibrated vs. assumed.
+
 ## KPI Target Table
 
 Every SRD Success Reality needs this table:

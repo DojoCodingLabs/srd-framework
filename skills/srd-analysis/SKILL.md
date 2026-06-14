@@ -32,6 +32,8 @@ The "6 months in" snapshot — KPIs, revenue breakdown, content volume, conversi
 ### 2. Synthetic Personas (`srd/personas.yml`)
 Exhaustive user archetypes in YAML format. Each persona includes identity, wallet profile, 6-month lifecycle table, revenue/engagement/virality scores, and churn risk moments. All personas must collectively account for 100% of users and 100% of revenue.
 
+These personas double as a **pollable synthetic consumer panel**: the `srd-prediction` skill (`/srd:predict`) reuses them to forecast demand for offers, creatives, copy, features, and prices — the demand-side complement to this supply-side analysis.
+
 **Resource**: `resources/persona-generation.md`
 
 ### 3. Critical Journeys (`srd/journeys.md`)
@@ -86,3 +88,4 @@ Every SRD must pass these consistency checks:
 - `/srd:assess` — Guided dialogue mode (deepest, works on codebases, PRDs, or ideas)
 - `/srd:generate` — Autonomous mode with review gates (codebases + PRDs)
 - `/srd:quick` — Fast single-pass audit (existing codebases only)
+- `/srd:predict` — Synthetic Demand Validation: poll the personas as a panel to forecast whether an offer/creative/copy/feature/price will sell (see the `srd-prediction` skill)
