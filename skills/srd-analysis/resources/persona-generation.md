@@ -72,6 +72,19 @@ Array of 2-4 specific time+condition pairs:
 - **Conversion trigger**: The single most important moment that converts this persona
 - **Critical note**: Optional flag for lifecycle-breaking issues (e.g., "J4 currently broken — cannot complete core journey")
 
+## Personas as a Synthetic Panel
+
+Beyond mapping journeys, these personas double as **respondents in Synthetic Demand Validation**
+(`srd-prediction` skill, `/srd:predict`). When you poll them against an offer/creative/copy/price, the
+demographic + JTBD + wallet richness here is exactly the conditioning that drives a realistic reaction
+(the research shows demographics-only conditioning under-performs). Two **optional** fields sharpen that
+use without affecting any existing SRD output:
+
+- `price_sensitivity`: "low" | "medium" | "high" — how much price moves this persona's decision.
+- `skepticism`: "low" | "medium" | "high" — default wariness toward claims/proof.
+
+These are additive and non-breaking; omit them and SDV infers stance from the existing fields.
+
 ## Persona Ecosystem
 
 After generating all personas, map the ecosystem:

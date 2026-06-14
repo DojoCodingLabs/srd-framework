@@ -52,13 +52,14 @@ claude plugin marketplace update DojoCodingLabs/srd-framework
 claude plugin update srd-framework@srd-framework
 ```
 
-### Three Modes
+### Modes
 
 | Mode | Command | Best For | Time |
 |------|---------|----------|------|
 | **Guided Dialogue** | `/srd:assess` | Ideas, PRDs, any project | 20-30 min |
 | **Autonomous** | `/srd:generate` | Codebases + PRDs | 15-20 min |
 | **Fast Audit** | `/srd:quick` | Existing codebases | 8-12 min |
+| **Demand Validation** | `/srd:predict` | Will it sell? Which variant? What price? | 10-15 min |
 
 ### Try It
 
@@ -174,6 +175,43 @@ All five sections in one readable document for humans.
 
 ---
 
+## Synthetic Demand Validation (`/srd:predict`)
+
+The five artifacts above validate the **supply side** — "is the product *built* well enough for a
+persona to reach paid value?" But every demand number in them (conversion rates, the revenue target) is
+a heuristic. `/srd:predict` adds the missing **demand side**: it turns your personas into a **pollable
+synthetic consumer panel** and forecasts whether an offer, info-product, ad creative, landing copy,
+feature, or price will actually sell.
+
+```bash
+# Is the $500 offer priced right? What's the demand curve?
+/srd:predict --surface offer --price "7-day diagnostic, $500, [paste offer]"
+
+# Which ad creative wins?
+/srd:predict --surface creative --compare ad-v1.png ad-v2.png ad-v3.png
+
+# Which headline converts?
+/srd:predict --surface copy --compare "Ship faster" vs "Stop guessing what to build"
+```
+
+**How it's built — and how it goes further.** The elicitation backbone comes from Maier et al. (PyMC
+Labs × Colgate-Palmolive, 2025), *["LLMs Reproduce Human Purchase Intent via Semantic Similarity
+Elicitation of Likert Ratings"](https://arxiv.org/abs/2510.08338)* — which recovers ~90% of human
+test–retest reliability by eliciting free-text reactions and mapping them to Likert distributions,
+versus ~26% for asking the model for a number directly. SDV extends it with:
+
+- **Comparative-first ranking** — leans on the paper's reliable 90% *ranking* signal (best-worst / duels), not its shakier absolutes.
+- **Capability-aware fidelity tiers** — auto-detects what the project exposes and scales its confidence to match: `T0` cold-start (zero-shot, directional) → `T1` persona-grounded → `T2` data-anchored (anchors/objections from real reviews/support) → `T3` outcome-calibrated (maps synthetic intent → **actual Stripe/PostHog conversions**). With an embeddings key it upgrades to true SSR.
+- **A construct battery** — purchase intent, appeal, comprehension, differentiation, believability, price-fairness, willingness-to-pay, share-intent → one composite **Demand Score**, plus *why*.
+- **Synthetic price sensitivity** — Van Westendorp + Gabor-Granger sweeps → a per-segment demand curve and a revenue-maximizing price.
+- **Structured objection mining** — the reasons-not-to-buy flow back into `srd/gap-audit.md` as demand-tagged **D-tier** fixes with revenue at risk attached.
+
+Outputs are written to `srd/forecasts/<id>.{concept.yml, forecast.yml, md}` — machine-readable and
+human-readable, matching the rest of SRD. Runs with **zero setup** (prompt-only) and gets sharper as
+your project exposes more real data.
+
+---
+
 ## Integration
 
 After generating the SRD, the plugin offers to integrate it into your development workflow:
@@ -213,11 +251,11 @@ Or as the framework's creator put it: *"It's like that Simpsons episode where Ho
 
 | Component | Purpose |
 |-----------|---------|
-| **Skills** | `srd-analysis` (methodology engine), `srd-guardian` (priority enforcement) |
-| **Agents** | `srd-analyst` (Opus, generates SRD), `codebase-auditor` (Sonnet, explores code), `srd-guardian` (Sonnet, validates alignment) |
-| **Commands** | `/srd:assess`, `/srd:generate`, `/srd:quick` |
+| **Skills** | `srd-analysis` (methodology engine), `srd-prediction` (synthetic demand validation), `srd-guardian` (priority enforcement) |
+| **Agents** | `srd-analyst` (Opus, generates SRD), `demand-forecaster` (Opus, runs demand forecasts), `codebase-auditor` (Sonnet, explores code), `srd-guardian` (Sonnet, validates alignment) |
+| **Commands** | `/srd:assess`, `/srd:generate`, `/srd:quick`, `/srd:predict` |
 | **Hooks** | PostToolUse reminder after Write/Edit operations |
-| **Schemas** | Persona, Journey, and Directive YAML schemas |
+| **Schemas** | Persona, Journey, Directive, Concept, and Forecast YAML schemas |
 
 ---
 

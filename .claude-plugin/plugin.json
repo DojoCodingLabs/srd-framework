@@ -1,7 +1,7 @@
 {
   "name": "srd-framework",
-  "version": "1.0.0",
-  "description": "Backwards-from-success product methodology for AI-native development teams. Define what done looks like, then reverse-engineer the path to get there.",
+  "version": "1.1.0",
+  "description": "Backwards-from-success product methodology for AI-native development teams. Define what done looks like, then reverse-engineer the path to get there. Includes Synthetic Demand Validation to forecast whether an offer, creative, copy, feature, or price will sell.",
   "author": {
     "name": "Dojo Coding",
     "url": "https://dojocoding.io"
@@ -23,6 +23,12 @@
     "backwards-from-success",
     "revenue-prioritization",
     "srd",
-    "dojo-coding"
+    "dojo-coding",
+    "synthetic-consumers",
+    "demand-validation",
+    "purchase-intent",
+    "ssr",
+    "pricing",
+    "ad-testing"
   ]
 }

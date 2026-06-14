@@ -1,8 +1,8 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "srd-framework",
-  "version": "1.0.0",
-  "description": "Backwards-from-success product methodology for AI-native development teams. Define what done looks like, then reverse-engineer the path to get there.",
+  "version": "1.1.0",
+  "description": "Backwards-from-success product methodology for AI-native development teams. Define what done looks like, then reverse-engineer the path to get there. Includes Synthetic Demand Validation to forecast whether an offer, creative, copy, feature, or price will sell.",
   "owner": {
     "name": "Dojo Coding",
     "email": "team@dojocoding.io"
@@ -10,8 +10,8 @@
   "plugins": [
     {
       "name": "srd-framework",
-      "description": "Synthetic Reality Development framework — generates synthetic personas, critical journeys, gap audits, and machine-readable directives. Works on codebases, PRDs, or just ideas. Three modes: guided dialogue, autonomous, and fast audit.",
-      "version": "1.0.0",
+      "description": "Synthetic Reality Development framework — generates synthetic personas, critical journeys, gap audits, and machine-readable directives, then validates demand by polling those personas as a synthetic consumer panel. Works on codebases, PRDs, or just ideas. Modes: guided dialogue, autonomous, fast audit, and demand validation.",
+      "version": "1.1.0",
       "author": {
         "name": "Dojo Coding",
         "email": "team@dojocoding.io"
@@ -33,7 +33,13 @@
         "backwards-from-success",
         "revenue-prioritization",
         "srd",
-        "dojo-coding"
+        "dojo-coding",
+        "synthetic-consumers",
+        "demand-validation",
+        "purchase-intent",
+        "ssr",
+        "pricing",
+        "ad-testing"
       ]
     }
   ]
