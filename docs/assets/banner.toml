@@ -1,0 +1,15 @@
+name = "SRD Framework"
+tagline = "Build [backwards] from success"
+chips = ["4 modes / 4 agents"]
+meta = "Open source · Claude Code"
+tile = "/"
+
+[card]
+kind = "ledger"
+label = "Claude Code"
+status = "v1.1.0 · MIT"
+rows = [
+  ["/srd:assess", "Guided dialogue, the deepest mode", "20-30 min"],
+  ["/srd:quick", "Fast audit of an existing codebase", "8-12 min"],
+  ["/srd:predict", "Will it sell? Which variant? What price?", "10-15 min"],
+]

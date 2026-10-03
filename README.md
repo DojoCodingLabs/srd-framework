@@ -1,8 +1,24 @@
-# SRD Framework — Synthetic Reality Development
+<p align="center">
+  <a href="https://dojocoding.io">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="docs/assets/banner-dark.svg">
+      <source media="(prefers-color-scheme: light)" srcset="docs/assets/banner-light.svg">
+      <img alt="SRD Framework by Dojo Coding: Build backwards from success" src="docs/assets/banner-light.svg" width="100%">
+    </picture>
+  </a>
+</p>
+
+# SRD Framework
+
+**Synthetic Reality Development: a Claude Code plugin that helps builders decide what to build next by defining success first and working backwards.**
 
 A backwards-from-success product methodology for AI-native development teams. Define what "done" looks like, then reverse-engineer the path to get there.
 
 **Built by [DojoCodingLabs](https://github.com/DojoCodingLabs). Works on any project.**
+
+![Version 1.1.0](https://img.shields.io/badge/version-1.1.0-FF7151?labelColor=201E3D) [![License MIT](https://img.shields.io/badge/license-MIT-FF7151?labelColor=201E3D)](LICENSE) ![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-201E3D?labelColor=201E3D)
+
+[Get started](#quick-start) · [What gets generated](#what-gets-generated) · [Contribute](#contributing) · [Report an issue](https://github.com/DojoCodingLabs/srd-framework/issues/new)
 
 ---
 
@@ -282,4 +298,8 @@ SRD methodology developed through building the [Dojo Platform](https://github.co
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE). Built by [Dojo Coding](https://dojocoding.io).
+
+<p align="center">
+  <a href="https://dojocoding.io"><img src="docs/assets/dojocoding-mark.png" alt="Dojo Coding" width="48"></a>
+</p>
